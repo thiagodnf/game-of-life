@@ -29,20 +29,6 @@ Please access [https://thiagodnf.github.io/game-of-life](https://thiagodnf.githu
   <img class="screenshot" src="https://user-images.githubusercontent.com/114015/178521589-289736cb-abfd-45a5-8643-ee1a2b7608d3.gif"/>
 </kbd>
 
-## For Developers
-
-Install the dependencies
-
-```bash
-npm install
-```
-
-Run the development enviroment
-
-```bash
-npm run dev
-```
-
 ## Questions or Suggestions
 
 Feel free to access the <a href="../../discussions">discussions tab</a> as you need
