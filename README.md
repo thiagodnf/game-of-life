@@ -50,4 +50,3 @@ However, if you get some profit from this or just want to encourage me to contin
 <a href="https://www.buymeacoffee.com/thiagodnf" target="_blank">
   <img src="https://www.buymeacoffee.com/assets/img/guidelines/download-assets-sm-2.svg" alt="Buy Me A Coffee" width="150px">
 </a>
-❤️
