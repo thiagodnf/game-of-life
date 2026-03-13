@@ -1,0 +1,98 @@
+body {
+    padding-top: 56px;
+}
+
+canvas {
+    margin-top: 20px;
+    border: 1px solid black;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.form-control {
+    font-size: .875rem;
+}
+
+
+.toolbar {
+    color: #777;
+    background-color: #fafafa;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+
+.btn-outline-secondary{
+    border-color: #5584AC !important;
+    color: #5584AC !important;
+}
+
+.btn-outline-secondary:hover{
+    background-color: #5584AC !important;
+    color: white !important;
+}
+
+.btn-check:active+.btn-outline-secondary, .btn-check:checked+.btn-outline-secondary, .btn-outline-secondary.active, .btn-outline-secondary.dropdown-toggle.show, .btn-outline-secondary:active {
+    background-color: #5584AC !important;
+    color: white !important;
+}
+
+#modal-examples .scrollable {
+    position: relative;
+    height: 200px;
+    overflow: auto;
+}
+
+/************************************
+ * Navbar                           *
+ ************************************/
+
+.navbar-primary {
+    background-color: #5584AC !important;
+    color: #ffffff;
+    border-radius: 0;
+}
+
+.navbar-primary .navbar-brand {
+    color: #ffffff;
+}
+
+.navbar-primary .navbar-nav>li>a {
+    color: #ffffff !important;
+}
+
+/************************************
+ * Menubar                          *
+ ************************************/
+
+.menubar {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.menubar .nav-item .nav-link {
+    color: #495057;
+}
+
+.menubar .dropdown-item-checkbox span {
+    padding-left: 4px !important;
+}
+
+.menubar .dropdown-menu li {
+    font-size: 14px;
+}
+
+.menubar .dropdown-menu .dropdown-item span {
+    padding-left: 10px;
+}
+
+.menubar .dropdown-menu .dropdown-item-checkbox:hover {
+    cursor: pointer;
+}
+
+.menubar .bi-blank {
+    visibility: hidden !important;
+    margin-left: 15px;
+}

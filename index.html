@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Game of Life</title>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="author" content="Thiago Ferreira">
+    <meta name="description" content="Game of Life developed in HTML, CSS and Javascript">
+    <meta name="keywords" content="game of life, simulator,html,css,javascript">
+
+    <meta name="theme-color" content="#5584AC">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Game of Life">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicons/favicon-16x16.png">
+    <link rel="manifest" href="images/favicons/site.webmanifest">
+
+    <link rel="apple-touch-startup-image" href="images/favicons/apple-touch-icon.png">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm navbar-primary fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Game of Life</a>
+        </div>
+    </nav>
+
+    <nav class="navbar navbar-expand navbar-light bg-light menubar py-0 my-0">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" data-bs-toggle="dropdown">File</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-import-csv"><i class="bi bi-upload"></i><span>Import .CSV</span></a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#" id="menubar-file-export"><i class="bi bi-download"></i><span>Export</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" data-bs-toggle="dropdown">Edit</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" id="menubar-edit-clear-all"><i class="bi bi-trash"></i><span>Clear All</span></a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modal-settings" href="#"><i class="bi bi-gear"></i><span>Settings</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" data-bs-toggle="dropdown">View</a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <label class="dropdown-item dropdown-item-checkbox" for="menubar-view-grid">
+                                    <input class="form-check-input" type="checkbox" value="" id="menubar-view-grid" checked />
+                                    <span>Grid</span>
+                                </label>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" data-bs-toggle="dropdown">Arrange</a>
+                        <ul class="dropdown-menu" style="min-width: 200px;">
+                            <li><a class="dropdown-item menubar-arrange-move" href="#" data-direction="ArrowUp"><i class="bi bi-arrow-up"></i><span>Move Up</span> <small class="float-end text-muted mt-1">Up</small> </a></li>
+                            <li><a class="dropdown-item menubar-arrange-move" href="#" data-direction="ArrowDown"><i class="bi bi-arrow-down"></i><span>Move Down</span> <small class="float-end text-muted mt-1">Down</small></a></li>
+                            <li><a class="dropdown-item menubar-arrange-move" href="#" data-direction="ArrowLeft"><i class="bi bi-arrow-left"></i><span>Move Right</span> <small class="float-end text-muted mt-1">Right</small></a></li>
+                            <li><a class="dropdown-item menubar-arrange-move" href="#" data-direction="ArrowRight"><i class="bi bi-arrow-right"></i><span>Move Left</span> <small class="float-end text-muted mt-1">Left</small></a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" data-bs-toggle="dropdown">Insert</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modal-examples" href="#"><i class="bi bi-search"></i><span>Examples</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" data-bs-toggle="dropdown">Help</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" target="_blank" href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life"><i class="bi bi-question-circle"></i><span>About Game of Life</span></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="toolbar">
+        <div class="container-fluid pt-2 pb-2">
+            <div class="btn-group d-flex d-sm-inline-flex">
+                <a href="#" class="btn btn-outline-secondary btn-sm" style="min-width: 70px;" id="startAndStop">
+                    <i class="bi bi-play"></i><span class=" ms-1">Play</span>
+                </a>
+                <a href="#" class="btn btn-outline-secondary btn-sm" style="min-width: 70px;" id="step">
+                    <i class="bi bi-skip-end"></i><span class="ms-1">Step</span>
+                </a>
+            </div>
+
+            <div class="btn-group d-flex d-sm-inline-flex mt-2 mt-sm-0">
+
+                <input type="radio" class="btn-check" name="speed" id="speed-slow" autocomplete="off" value="160">
+                <label class="btn btn-sm btn-outline-secondary" for="speed-slow">Slow</label>
+
+                <input type="radio" class="btn-check" name="speed" id="speed-normal" autocomplete="off" checked value="80">
+                <label class="btn btn-sm btn-outline-secondary" for="speed-normal">Normal</label>
+
+                <input type="radio" class="btn-check" name="speed" id="speed-fast" autocomplete="off" value="20">
+                <label class="btn btn-sm btn-outline-secondary" for="speed-fast">Fast</label>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12" id="panel">
+                <canvas id="canvas" width="600" height="600"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal fade" id="modal-settings" tabindex="-1" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Settings</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+
+                        <p class="text-muted">Colors</p>
+
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Cell
+                                <input type="color" class="form-control form-control-color" id="cell-color" value="#171717">
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Grid
+                                <input type="color" class="form-control form-control-color" id="grid-color" value="#171717">
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Background
+                                <input type="color" class="form-control form-control-color" id="background-color" value="#ffffff">
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modal-import-csv" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form id="form-import-csv" action="#">
+                    <div class="modal-header">
+                        <h5 class="modal-title"><i class="bi bi-upload me-2"></i>Import .CSV</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <label for="csv-file" class="form-label">File</label>
+                            <input class="form-control" type="file" id="csv-file" required>
+                            <small class="form-text">Use a comma to separate values.</small>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Import</button>
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Examples Modal -->
+    <div class="modal fade" id="modal-examples" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Examples</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-muted">Click to add them</p>
+                    <div class="list-group lists-group-flush">
+                        <a class="list-group-item list-group-item-action" href="#" data-file="data/examples/still-lifes/block.csv">Block</a>
+                        <a class="list-group-item list-group-item-action" href="#" data-file="data/examples/still-lifes/beehive.csv">Beehive</a>
+                        <a class="list-group-item list-group-item-action" href="#" data-file="data/examples/still-lifes/loaf.csv">Loaf</a>
+                        <a class="list-group-item list-group-item-action" href="#" data-file="data/examples/still-lifes/boat.csv">Boat</a>
+
+                        <a class="list-group-item list-group-item-action" href="#" data-file="data/examples/oscillators/blinker.csv">Blinker</a>
+                        <a class="list-group-item list-group-item-action" href="#" data-file="data/examples/oscillators/toad.csv">Toad</a>
+                        <a class="list-group-item list-group-item-action" href="#" data-file="data/examples/oscillators/beacon.csv">Beacon</a>
+                        <a class="list-group-item list-group-item-action" href="#" data-file="data/examples/oscillators/pulsar.csv">Pulsar</a>
+
+                        <a class="list-group-item list-group-item-action" href="#" data-file="data/examples/spaceships/glider.csv">Glider</a>
+                        <a class="list-group-item list-group-item-action" href="#" data-file="data/examples/spaceships/lightweight.csv">Lightweight spaceship</a>
+                        <a class="list-group-item list-group-item-action" href="#" data-file="data/examples/spaceships/the-r-pentomino.csv">The R-pentomino</a>
+                        <a class="list-group-item list-group-item-action" href="#" data-file="data/examples/spaceships/diehard.csv">Diehard</a>
+                        <a class="list-group-item list-group-item-action" href="#" data-file="data/examples/spaceships/gosper-glider-gun.csv">Gosper Glider Gun</a>
+                        <a class="list-group-item list-group-item-action" href="#" data-file="data/examples/spaceships/119P4H1V0.csv">119P4H1V0</a>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"></script>
+
+    <script src="js/utils/canvas-utils.js"></script>
+    <script src="js/utils/cell.js"></script>
+    <script src="js/utils/file-utils.js"></script>
+    <script src="js/utils/bootbox-utils.js"></script>
+
+    <script src="js/game.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
